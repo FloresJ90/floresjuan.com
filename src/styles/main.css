@@ -8,13 +8,56 @@ body {
 header {
     background: #35424a;
     color: #ffffff;
-    padding: 20px 0;
+    padding: 2em 0;
     text-align: center;
 }
 
+.header-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
 h1 {
-    margin: 0;
+    margin: 0 0 0.5em 0;
     font-size: 2.5em;
+}
+
+.title {
+    font-size: 1.2em;
+    margin: 0 0 1em 0;
+    color: #9eb3c2;
+}
+
+.contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 2em; /* Increased gap between buttons */
+    align-items: center;
+    margin-top: 1em;
+}
+
+.contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: #0077b5;
+    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.contact-btn:hover {
+    background: #005983;
+    transform: translateY(-1px);
+}
+
+.contact-btn svg,
+.contact-btn img {
+    filter: brightness(0) invert(1);
 }
 
 section {
@@ -48,12 +91,171 @@ footer {
     width: 100%;
 }
 
-@media (max-width: 600px) {
-    header, section, footer {
-        padding: 10px;
-    }
+/* Experience section container */
+#experience {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em 0;
+    min-height: 200px; /* Minimum height for few entries */
+    max-height: 600px; /* Maximum height before scrolling */
+}
 
-    h1 {
-        font-size: 2em;
+/* Timeline container styles */
+.experience-timeline {
+    position: relative;
+    margin: 2em 0;
+    padding: 20px 0;
+    width: 100%;
+    max-width: 600px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 150px; /* Minimum height for single entry */
+}
+
+/* Remove fixed height and keep overflow only for max-height case */
+@media (min-height: 800px) {
+    .experience-timeline {
+        max-height: 500px;
+        overflow-y: auto;
     }
+}
+
+/* Vertical line positioning with caps */
+.experience-timeline::before {
+    content: "";
+    position: absolute;
+    left: 25px;
+    /* Extend line above and below container */
+    top: -20px;
+    bottom: -20px;
+    width: 3px;
+    background: #0077b5;
+    z-index: 1;
+}
+
+/* Timeline bar styles */
+.timeline-bar {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    min-height: 56px;
+    padding-left: 44px;
+    /* Remove margin-bottom as we'll handle spacing via JavaScript */
+}
+
+@media (max-width: 600px) {
+    .timeline-bar {
+        margin-bottom: 24px; /* Adjusted for mobile but still larger */
+    }
+}
+
+/* Timeline button styles */
+.timeline-btn {
+    margin-left: 15px; /* Reduced margin since we moved padding to timeline-bar */
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    padding: 16px 20px;
+    min-width: 220px;
+    max-width: 500px;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: box-shadow 0.2s, background 0.2s;
+    outline: none;
+    display: block;
+}
+
+.timeline-btn:hover,
+.timeline-btn:focus {
+    background: #f0f6fa;
+    box-shadow: 0 4px 16px rgba(0,123,181,0.12);
+}
+
+.timeline-title {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #0077b5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.4em;
+    gap: 10px;
+}
+
+.timeline-date {
+    color: #888;
+    font-size: 0.95em;
+    margin-left: 1em;
+    font-weight: 400;
+}
+
+.timeline-desc {
+    color: #444;
+    font-size: 0.98em;
+    margin-top: 0.2em;
+}
+
+/* Timeline widget styles */
+.timeline-widget {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    cursor: pointer;
+    vertical-align: middle;
+    transition: transform 0.2s;
+}
+
+.timeline-widget:hover {
+    transform: scale(1.2);
+}
+
+/* Timeline dot styles */
+.timeline-dot {
+    position: absolute;
+    left: calc(25px + 1.5px); /* Always relative to line position */
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background: #0077b5;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 1px #0077b5;
+    z-index: 2;
+}
+
+@media (max-width: 600px) {
+    #experience {
+        padding: 1.5em 8px; /* Adjusted padding for mobile */
+    }
+    .experience-timeline {
+        max-height: 400px; /* Slightly smaller on mobile but still taller */
+        max-width: 100%;
+    }
+    .timeline-btn {
+        margin-left: 25px;
+        padding: 10px 12px;
+        min-width: 0;
+        max-width: 100%;
+    }
+    .experience-timeline::after,
+    .experience-timeline > :last-child::after {
+        left: calc(25px + 1.5px); /* Match desktop positioning */
+        width: 10px;
+        height: 10px;
+        border-width: 2px;
+        background: #dc3545;
+        box-shadow: 0 0 0 1px #dc3545;
+    }
+}
+
+.company-separator {
+    margin: 0 0.5em;
+    color: #666;
+    font-weight: normal;
 }
